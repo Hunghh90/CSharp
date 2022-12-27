@@ -8,11 +8,21 @@ public class Program
     static void Main(string[] args)
     {
         StringToVoid smgs = new StringToVoid(ShowMessage);
+        StringToVoid smgs2 = new StringToVoid(DemoDelegate.SayHello);
+        StringToVoid smgs3 = new StringToVoid(new DemoDelegate().ShowInfo);
+
+        DemoEvent de = new DemoEvent();
+        de.Invoke();
     }
     static void ShowMessage(string msg)
     {
         Console.WriteLine(msg);
     }
+
+    
+    
+
+    
     static void Main4(String[] args) 
     { 
         PhoneBook pb = new PhoneBook();
