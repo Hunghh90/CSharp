@@ -7,6 +7,62 @@ public class Program
 {
     static void Main(string[] args)
     {
+        Fetch();
+        
+    }
+
+    static async void Fetch()
+    {
+        CallApi ca = new CallApi();
+        Product s = await ca.FetchData();
+        Console.WriteLine(s.ToString());
+
+    }
+    static void Main6(string[] args)
+    {
+        //Thread t1 = new Thread(ThreadRun);
+        //Thread t2 = new Thread(ThreadRunParam);
+        //Thread t3 = new Thread(ThreadRunParam);
+        //t1.Start();
+        //t2.Start("Hello");
+        //t3.Start(1);
+        Number num = new Number() { X =0, Y = 0 };
+        Thread n1 = new Thread(ThreadLock);
+        Thread n2 = new Thread(ThreadLock);
+        n1.Start(num);
+        n2.Start(num);
+    }
+
+    static void ThreadRun()
+    {
+        for(int i=0; i<10; i++) 
+        {
+
+            Console.WriteLine("i=" + i);
+                try 
+            { 
+                Thread.Sleep(1000);
+            }catch(Exception e)
+            { 
+            }
+        }
+    }
+    static void ThreadRunParam(object msg)
+    {
+        for(int i=0; i<15; i++) 
+        {
+
+            Console.WriteLine("i=" + i + "Msg =" + msg);
+                try 
+            { 
+                Thread.Sleep(1000);
+            }catch(Exception e)
+            { 
+            }
+        }
+    }
+    static void Main5(string[] args)
+    {
         StringToVoid smgs = new StringToVoid(ShowMessage);
         StringToVoid smgs2 = new StringToVoid(DemoDelegate.SayHello);
         StringToVoid smgs3 = new StringToVoid(new DemoDelegate().ShowInfo);
@@ -17,6 +73,24 @@ public class Program
     static void ShowMessage(string msg)
     {
         Console.WriteLine(msg);
+    }
+
+    static void ThreadLock(object obj)
+    {
+        Number n = (Number)obj;
+        for(int i =0;i<20;i++)
+        {
+            lock (n) 
+            {
+                n.ChangeXY();
+                n.PrintXY();
+            }
+           
+            try
+            {
+                Thread.Sleep(1000);
+            }catch(Exception e) { }
+        }
     }
 
     

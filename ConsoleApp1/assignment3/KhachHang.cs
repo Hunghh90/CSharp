@@ -8,5 +8,9 @@ namespace ConsoleApp1.assignment3
 {
     internal class KhachHang
     {
+        public void TinhTien()
+        {
+
+        }
     }
 }
